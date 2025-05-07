@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .select-university-container {
+        padding: 40px;
+        text-align: center;
+        background-color: #F5F8FF; /* Very light blue background for the page */
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .select-university-container h1 {
+        margin-bottom: 30px;
+        font-size: 36px;
+        color: #1E3A8A; /* Dark blue for heading */
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+    .universities-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Larger cards */
+        gap: 50px; /* More spacing between cards */
+        width: min(90%, 1400px); /* Wider container */
+        margin: 0 auto;
+    }
+
+    .university-card {
+        background-color: #DBEAFE; /* Soft light blue for cards */
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Deeper shadow for depth */
+        padding: 40px; /* More padding for larger cards */
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 2px solid #3B82F6; /* Bright blue border */
+        text-decoration: none;
+        color: #1E3A8A; /* Dark blue text */
+    }
+
+    .university-card:hover {
+        transform: translateY(-15px); /* More pronounced lift on hover */
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+        background-color: #BFDBFE; /* Slightly darker blue on hover */
+    }
+
+    .university-card i {
+        font-size: 60px; /* Larger icon */
+        color: #3B82F6; /* Bright blue icon */
+        margin-bottom: 25px;
+    }
+
+    .university-card h3 {
+        font-size: 32px; /* Larger text */
+        margin: 0;
+        font-weight: bold;
+        text-transform: capitalize;
+    }
+
+    @media (max-width: 768px) {
+        .universities-grid {
+            grid-template-columns: 1fr; /* Single column on small screens */
+        }
+
+        .university-card {
+            padding: 30px; /* Slightly less padding on mobile */
+        }
+    }
+</style>
+
+<div class="select-university-container">
+    <h1>Select University to Manage Programs</h1>
+    <div class="universities-grid">
+        {% for university in universities %}
+        <a href="{% url 'core:dashboard_program_select_faculty' university.pk %}" class="university-card">
+            <i class="fas fa-university"></i>
+            <h3>{{ university.name }}</h3>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

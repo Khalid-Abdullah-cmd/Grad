@@ -1,0 +1,118 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ program.name }} – Details</title>
+    <link rel="stylesheet" href="{% static 'core/CSS/main.css' %}" />
+    <style>
+      .breadcrumb {
+        display: flex;
+        gap: 5px;
+        width: min(90%, 1200px);
+        margin-inline: auto;
+        margin-top: 5px;
+      }
+      .breadcrumb > a{
+        font-size: 16px;
+        color: blue;
+      }
+      .breadcrumb > a:last-child{
+        color: black;
+        cursor: default;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-icon">
+        <h1><a href="/">إستدراك</a></h1>
+      </div>
+      <i class="fa-solid fa-bars menu-toggle" aria-label="فتح القائمة"></i>
+      <ul class="nav-container menu-animated">
+        {% for university in unis %}
+        <li class="nav-item">
+          <a href="{% url 'core:faculty_list_public' university.id %}"
+            >{{ university.name }}</a
+          >
+        </li>
+        {% empty %}
+        <li class="nav-item"><a href="#">لا توجد جامعات متاحة حاليًا</a></li>
+        {% endfor %}
+        <li class="nav-item"><a href="{% url 'core:about' %}">عن الموقع</a></li>
+        <li class="nav-item"><a href="#">اتصل بنا</a></li>
+        <li class="nav-item">
+          <a href="{% url 'core:login' %}">تسجيل الدخول</a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-section">
+        <h1>برنامج: <span>{{ program.name }}</span></h1>
+      </div>
+    </section>
+
+    <p class="breadcrumb">
+      <a href="{% url 'core:index' %}">الصفحة الرئيسية</a> →
+      <a href="{% url 'core:faculty_list_public' university.id %}"
+        >{{ university.name }}</a
+      >
+      →
+    </p>
+
+    <section class="course-details">
+      <div class="course-info">
+        <h2>تفاصيل البرنامج</h2>
+        <p>{{ program.description }}</p>
+
+        <h2>المادة العلمية</h2>
+        <p>{{ program.content }}</p>
+
+        <h2>الوظائف المحتملة</h2>
+        {% if jobs %}
+        <ul>
+          {% for job in jobs %}
+          <li>{{ job.name }}</li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>No associated jobs.</p>
+        {% endif %}
+
+        <a href="{{ program.link }}" target="_blank"
+          >رابط الموقع الرسمى للبرنامج</a
+        >
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="navigation">
+          <ul>
+            <li><a href="{% url 'core:index' %}">Home</a></li>
+            <li><a href="{% url 'core:about' %}">About</a></li>
+            <li><a href="{% url 'core:contact' %}">Contact</a></li>
+          </ul>
+        </div>
+        <div class="social-media">
+          <a
+            href="https://web.facebook.com/profile.php?id=61560032261539&rdid=QjZKeZcQ2A6lGvB7&share_url=https%3A%2F%2Fweb.facebook.com%2Fshare%2F1Fr4PVYz5B%2F%3F_rdc%3D1%26_rdr#"
+            ><i class="fab fa-facebook"></i
+          ></a>
+          <a href="https://x.com/astidrak?t=nvTdL3QPMBCWtkostB7AkQ&s=08"
+            ><i class="fab fa-x-twitter"></i
+          ></a>
+          <a href="https://www.instagram.com/astid_rak1?igsh=Y2F5NHlxbmwzN21i"
+            ><i class="fa-solid fa-envelope"></i
+          ></a>
+        </div>
+      </div>
+      <p>© 2025 Estedrak. All rights reserved.</p>
+    </footer>
+
+    <script src="{% static 'core/JS/main.js' %}"></script>
+  </body>
+</html>

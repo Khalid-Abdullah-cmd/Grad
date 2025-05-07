@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .select-faculty-container {
+        padding: 40px;
+        text-align: center;
+        background-color: #F5F8FF; /* Very light blue background */
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .select-faculty-container h1 {
+        margin-bottom: 30px;
+        font-size: 36px;
+        color: #1E3A8A; /* Dark blue for heading */
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+    .faculties-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Larger cards */
+        gap: 50px; /* More spacing between cards */
+        width: min(90%, 1400px); /* Wider container */
+        margin: 0 auto;
+    }
+
+    .faculty-card {
+        background-color: #DBEAFE; /* Soft light blue for cards */
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Deeper shadow for depth */
+        padding: 40px; /* More padding for larger cards */
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 2px solid #3B82F6; /* Bright blue border */
+        text-decoration: none;
+        color: #1E3A8A; /* Dark blue text */
+    }
+
+    .faculty-card:hover {
+        transform: translateY(-15px); /* Lift on hover */
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+        background-color: #BFDBFE; /* Slightly darker blue on hover */
+    }
+
+    .faculty-card i {
+        font-size: 60px; /* Larger icon */
+        color: #3B82F6; /* Bright blue icon */
+        margin-bottom: 25px;
+    }
+
+    .faculty-card h3 {
+        font-size: 32px; /* Larger text */
+        margin: 0;
+        font-weight: bold;
+        text-transform: capitalize;
+    }
+
+    .back-link {
+        margin-top: 40px;
+        font-size: 20px;
+        color: #3B82F6;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .back-link:hover {
+        color: #1E3A8A;
+    }
+
+    @media (max-width: 768px) {
+        .faculties-grid {
+            grid-template-columns: 1fr; /* Single column on small screens */
+        }
+
+        .faculty-card {
+            padding: 30px; /* Slightly less padding on mobile */
+        }
+    }
+</style>
+
+<div class="select-faculty-container">
+    <h1>Select Faculty in {{ university.name }} to Manage Programs</h1>
+    <div class="faculties-grid">
+        {% for faculty in faculties %}
+        <a href="{% url 'core:dashboard_program_list' faculty.pk %}" class="faculty-card">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <h3>{{ faculty.name }}</h3>
+        </a>
+        {% endfor %}
+    </div>
+    <a href="{% url 'core:dashboard_program_select_university' %}" class="back-link">Back to University Selection</a>
+</div>
+{% endblock %}

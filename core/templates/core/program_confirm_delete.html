@@ -1,0 +1,12 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Delete Program</h1>
+<p>Are you sure you want to delete "{{ object.name }}" from "{{ object.faculty.name }}" in "{{ object.faculty.university.name }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, delete</button>
+    <a href="{% url 'core:dashboard_program_list' object.faculty.pk %}">Cancel</a>
+</form>
+{% endblock %}

@@ -1,0 +1,186 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estedrak | عن الموقع</title>
+  <script src="https://kit.fontawesome.com/8b5bfaa248.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../../static/core/CSS/main.css">
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap");
+    * { box-sizing: border-box; margin: 0; padding: 0; text-decoration: none; list-style: none; }
+    html { scroll-behavior: smooth; }
+    body {
+      --main-color: white;
+      --secondary-color: #f6f6f6;
+      --font-color: black;
+      --third-color: #9dbbf8;
+      --secondary-font-color: #3b45fd;
+      --complementary-color: #cdaddc;
+      background-color: var(--main-color);
+      font-family: "Tajawal", Arial, sans-serif;
+      color: var(--font-color);
+    }
+    :root { --10px: calc(10/16*1rem); --16px: 1rem; --20px: calc(20/16*1rem); --24px: calc(24/16*1rem); --30px: calc(30/16*1rem); --36px: calc(36/16*1rem); }
+    nav.navbar { position: sticky; top: 0; background: var(--main-color); display: flex; justify-content: space-between; align-items: center; padding: var(--16px) var(--24px);}    
+    .nav-icon a { font-weight: 800; color: var(--secondary-font-color); }
+    .nav-container { display: flex; gap: 10px; }
+    .nav-item a { color: var(--font-color); padding: 8px; }
+    .nav-item.active { background: var(--complementary-color); }
+    section.hero { padding: var(--50px) 0; background: var(--third-color); text-align: center; }
+    .hero-section h1 { font-size: var(--30px); margin-bottom: var(--10px); }
+    .hero-section p { font-size: var(--20px); margin-bottom: var(--10px); }
+    section .info { width: min(90%,1200px); margin: 0 auto; text-align: center; padding: var(--24px) 0; }
+    section .info h2 { font-size: var(--28px); margin-bottom: var(--16px); }
+    section .info p, section .wide-card ul li { font-size: var(--18px); line-height: 1.5; }
+    .wide-card { display: flex; background: var(--secondary-color); margin: var(--30px) auto; max-width: 1200px; border-radius: 10px; overflow: hidden; }
+    .wide-card .info-half, .wide-card .img-half { width: 50%; padding: var(--20px); }
+    .wide-card ul { list-style: disc; padding-inline-start: 20px; }
+    .wide-card img { width: 100%; height: auto; display: block; }
+    footer { background: var(--secondary-color); text-align: center; padding: var(--30px) 0; }
+    footer .navigation ul { display: flex; justify-content: center; gap: 20px; }
+    footer a { color: var(--font-color); }
+    footer p { margin-top: var(--16px); font-size: var(--14px); } section {
+      min-height: 40vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: var(--30px);
+    }
+    footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: var(--30px);
+      padding-block: var(--100px);
+      padding-top: var(--100px);
+      background-color: var(--secondary-color);
+      position: relative;
+      min-height: 60vh;
+      margin-top: var(--100px);
+      p {
+        position: absolute;
+        bottom: 5px;
+      }
+    }
+    footer .container {
+      width: min(90%, 950px);
+      display: flex;
+      gap: var(--30px);
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--30px);
+      color: var(--font-color);
+      font-size: var(--20px);
+    }
+    footer .container .navigation {
+      display: flex;
+      gap: var(--16px);
+    
+      a {
+        color: var(--font-color);
+        transition: color 0.3s ease-in-out;
+      }
+      a:hover {
+        color: var(--hover-font-color);
+      }
+    }
+    footer .container .social-media {
+      display: flex;
+      gap: var(--16px);
+      align-items: center;
+      i {
+        font-size: var(--24px);
+        transition: color 0.3s ease-in-out;
+      }
+    }
+    .fa-facebook:hover {
+      color: #4267b2;
+    }
+    .fa-x-twitter:hover {
+      color: #1da1f2;
+    }
+    .fa-envelope:hover {
+      color: #ff2727;
+    }
+    
+    @media screen and (max-width: calc((650 / 16) * 1rem)) {
+      footer .container {
+        flex-direction: column;
+        gap: var(--60px);
+        padding: var(--20px);
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <h1 class="nav-icon"><a href="{% url 'core:index' %}">إستدراك</a></h1>
+    <ul class="nav-container">
+      <li class="nav-item"><a href="{% url 'core:about' %}" class="active">عن الموقع</a></li>
+      <li class="nav-item"><a href="{% url 'core:contact' %}">اتصل بنا</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-section">
+      <h1>عن الموقع</h1>
+      <p>مرحبًا بكم في دليلك للتعرف على البرامج المميزة بجامعات القاهرة الكبرى. هذا الموقع هو دليلك الشامل لاستكشاف التخصصات الأكاديمية المتخصصة التي تقدمها الجامعات الحكومية في منطقة القاهرة الكبرى. ابدأ رحلتك التعليمية اليوم واختر بذكاء!</p>
+
+    </div>
+  </section>
+
+  <section style="margin-top: 50px;">
+    <div class="info">
+      
+      <h2>ما هي البرامج المميزة؟</h2>
+      <p>هي برامج أكاديمية متخصصة تقدمها بعض الجامعات، وتهدف إلى توفير تعليم عالي الجودة بمعايير حديثة، سواء من حيث المناهج الدراسية، أو أساليب التدريس، أو الارتباط بسوق العمل. تختلف هذه البرامج عن البرامج التقليدية في كونها قد تتطلب شروط قبول خاصة، مثل معدلات مرتفعة في الثانوية العامة، أو اجتياز اختبارات معينة، كما أنها برسوم دراسية منفصلة.</p>
+
+      <h2>ماذا ستجد على الموقع؟</h2>
+      <ul>
+        <li>البرامج المميزة في الجامعات الحكومية الموجودة في القاهرة الكبرى.</li>
+        <li>وصف لكل برنامج.</li>
+        <li>المواد العلمية المرتبطة بكل برنامج.</li>
+        <li>الوظائف المحتملة لخريجي هذه البرامج.</li>
+      </ul>
+
+      <h2>ملاحظة</h2>
+      <p style="margin-top: var(--30px);">هذا الموقع هو مشروع تخرج لطلاب من قسم دراسات المعلومات كلية الآداب بجامعة عين شمس.</p>
+    </div>
+  </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="navigation">
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li class="nav-item"><a href="{% url 'core:about' %}">About</a></li>
+            <li><a href="{% url 'core:contact' %}">Contact</a></li>
+            <a href="{% url 'core:login' %}">تسجيل الدخول</a>
+          </ul>
+        </div>
+        <div class="social-media">
+          <a
+            href="https://web.facebook.com/profile.php?id=61560032261539&rdid=QjZKeZcQ2A6lGvB7&share_url=https%3A%2F%2Fweb.facebook.com%2Fshare%2F1Fr4PVYz5B%2F%3F_rdc%3D1%26_rdr#"
+            ><i class="fab fa-facebook"></i
+          ></a>
+          <a href="https://x.com/astidrak?t=nvTdL3QPMBCWtkostB7AkQ&s=08"
+            ><i class="fab fa-x-twitter"></i
+          ></a>
+          <a href="https://www.instagram.com/astid_rak1?igsh=Y2F5NHlxbmwzN21i"
+            ><i class="fa-solid fa-envelope"></i
+          ></a>
+        </div>
+      </div>
+      <p>© 2025 Estedrak. All rights reserved.</p>
+    </footer>
+
+
+</body>
+</html>

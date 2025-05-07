@@ -1,0 +1,159 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Estedrak</title>
+    <link rel="stylesheet" href="../../static/core/CSS/main.css" />
+    <script
+      src="https://kit.fontawesome.com/8b5bfaa248.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar" dir="ltr">
+      <div class="nav-icon">
+        <h1><a href="/">إستدراك</a></h1>
+      </div>
+      <i class="fa-solid fa-bars menu-toggle" aria-label="فتح القائمة"></i>
+      <ul class="nav-container menu-animated">
+        {% for university in unis %}
+        <li class="nav-item">
+          <a href="{% url 'core:faculty_list_public' university.id %}"
+            >{{ university.name }}</a
+          >
+        </li>
+        {% empty %}
+        <li class="nav-item"><a href="#">لا توجد جامعات متاحة حاليًا</a></li>
+        {% endfor %}
+        <li class="nav-item"><a href="{% url 'core:about' %}">عن الموقع</a></li>
+        <li class="nav-item"><a href="{% url 'core:contact'%}">اتصل بنا</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-section">
+        <h1>دليلك للتعرف على البرامج المميزة بجامعات القاهرة الكبرى</h1>
+        <p>
+          اكتشف البرامج الجامعية المميزة في جامعات القاهرة الكبرى! دليلك الشامل
+          الذي يقدم لك أحدث التخصصات المعتمدة، المواد العلمية، والوظائف المحتملة
+          لكل تخصص - كل ذلك لمساعدتك على اختيار المسار الأفضل لمستقبلك المهني.
+          ابدأ رحلتك التعليمية اليوم واختر بذكاء!
+        </p>
+        <h3>استكشف البرامج:</h3>
+      </div>
+      <div class="cards-holder">
+        {% for university in unis %}
+        <a
+          href="{% url 'core:faculty_list_public' university.id %}"
+          class="card"
+        >
+          <div class="img-holder">
+            {% if university.name == 'جامعة عين شمس' %}
+            <img
+              src="{% static 'Imgs/Ain_Shams_logo.webp' %}"
+              alt="{{ university.name }} Logo"
+            />
+            {% elif university.name == 'جامعة القاهرة' %}
+            <img
+              src="{% static 'Imgs/Cairo-university-logo.webp' %}"
+              alt="{{ university.name }} Logo"
+            />
+            {% elif university.name == 'جامعة حلوان' %}
+            <img
+              src="{% static 'Imgs/Helwan_University_Logo.webp' %}"
+              alt="{{ university.name }} Logo"
+            />
+            {% elif university.name == 'جامعة بنها' %}
+            <img
+              src="{% static 'Imgs/Benha_University_Logo.webp' %}"
+              alt="{{ university.name }} Logo"
+            />
+            {% else %}
+            <img
+              src="{% static 'Imgs/default_logo.webp' %}"
+              alt="Default Logo"
+            />
+            {% endif %}
+          </div>
+          <div class="card-info">
+            <h6>{{ university.name }}</h6>
+            <p>{{ university.program_count }} برنامج</p>
+          </div>
+        </a>
+        {% empty %}
+        <p>لا توجد جامعات لعرضها حاليًا.</p>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- Info Section -->
+    <section>
+      <div class="info">
+        <h2>ما هى البرامج المميزة؟</h2>
+        <p>
+          هي برامج أكاديمية متخصصة تقدمها بعض الجامعات، وتهدف إلى توفير تعليم
+          عالي الجودة بمعايير حديثة، سواء من حيث المناهج الدراسية، أو أساليب
+          التدريس، أو الارتباط بسوق العمل تختلف هذه البرامج عن البرامج التقليدية
+          في كونها قد تتطلب شروط قبول خاصة، مثل معدلات مرتفعة في الثانوية
+          العامة، أو اجتياز اختبارات معينة، كما أنها برسوم دراسية منفصلة .
+        </p>
+      </div>
+    </section>
+
+    <!-- Wide Card Section -->
+    <section>
+      <div class="wide-card">
+        <div class="info-half">
+          <h4>ماذا ستجد على الموقع؟</h4>
+          <ul>
+            <li>
+              البرامج المميزة فى الجامعات الحكومية الموجودة فى القاهرة الكبرى.
+            </li>
+            <li>وصف للبرنامج.</li>
+            <li>المادة العلمية المرتبطة بالبرنامج.</li>
+            <li>الوظائف المحتملة لخريجى هذا البرنامج.</li>
+          </ul>
+        </div>
+        <div class="img-half">
+          <img
+            src="{% static 'Imgs/special-programs.webp' %}"
+            alt="صورة مكتوب عليها البرامج المميزة"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="navigation">
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li class="nav-item"><a href="{% url 'core:about' %}">About</a></li>
+            <li><a href="{% url 'core:contact' %}">Contact</a></li>
+            <a href="{% url 'core:login' %}">تسجيل الدخول</a>
+          </ul>
+        </div>
+        <div class="social-media">
+          <a
+            href="https://web.facebook.com/profile.php?id=61560032261539&rdid=QjZKeZcQ2A6lGvB7&share_url=https%3A%2F%2Fweb.facebook.com%2Fshare%2F1Fr4PVYz5B%2F%3F_rdc%3D1%26_rdr#"
+            ><i class="fab fa-facebook"></i
+          ></a>
+          <a href="https://x.com/astidrak?t=nvTdL3QPMBCWtkostB7AkQ&s=08"
+            ><i class="fab fa-x-twitter"></i
+          ></a>
+          <a href="https://www.instagram.com/astid_rak1?igsh=Y2F5NHlxbmwzN21i"
+            ><i class="fa-solid fa-envelope"></i
+          ></a>
+        </div>
+      </div>
+      <p>© 2025 Estedrak. All rights reserved.</p>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>
