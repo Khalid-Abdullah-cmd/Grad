@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Estedrak | ??</title>
-    <link rel="stylesheet" href="../../static/core/CSS/main.css" />
+    <title>Estedrak | اتصل بنا</title>
+    <link rel="stylesheet" href="{% static 'core/CSS/main.css' %}" />
     <script
       src="https://kit.fontawesome.com/8b5bfaa248.js"
       crossorigin="anonymous"
@@ -12,19 +13,32 @@
   </head>
   <body>
     <nav class="navbar" dir="ltr">
-      <h1 class="nav-icon"><a href="{% url 'core:index' %}">إستدراك</a></h1>
+      <div class="nav-icon">
+        <h1><a href="/">إستدراك</a></h1>
+      </div>
+      <i class="fa-solid fa-bars menu-toggle" aria-label="فتح القائمة"></i>
       <ul class="nav-container menu-animated">
-        <li class="nav-item"><a href=" {% url 'core:about' %} ">عن الموقع</a></li>
-        <li class="nav-item active"><a href="#">اتصل بنا</a></li>
+        {% for university in unis %}
+        <li class="nav-item">
+          <a href="{% url 'core:faculty_list_public' university.id %}">
+            {{ university.name }}
+          </a>
+        </li>
+        {% empty %}
+        <li class="nav-item"><a href="#">لا توجد جامعات متاحة حاليًا</a></li>
+        {% endfor %}
+        <li class="nav-item"><a href="{% url 'core:about' %}">عن الموقع</a></li>
+        <li class="nav-item"><a href="{% url 'core:contact' %}">اتصل بنا</a></li>
       </ul>
-      <i class="fa-solid fa-bars"></i>
     </nav>
+
     <section class="hero">
       <div class="hero-section">
         <h1>اتصل بنا</h1>
         <p>إذا كان لديك أي استفسارات أو اقتراحات، فلا تتردد في التواصل معنا.</p>
       </div>
     </section>
+
     <section class="contact-us">
       <form action="#" method="post">
         <div class="form-group">
@@ -46,35 +60,54 @@
       <h2>or</h2>
       <div class="social-media">
         <a
-        href="https://web.facebook.com/profile.php?id=61560032261539&rdid=QjZKeZcQ2A6lGvB7&share_url=https%3A%2F%2Fweb.facebook.com%2Fshare%2F1Fr4PVYz5B%2F%3F_rdc%3D1%26_rdr#"
-        ><i class="fab fa-facebook"></i
-      ></a>
-      <a href="https://x.com/astidrak?t=nvTdL3QPMBCWtkostB7AkQ&s=08"
-        ><i class="fab fa-x-twitter"></i
-      ></a>
-      <a href="https://www.instagram.com/astid_rak1?igsh=Y2F5NHlxbmwzN21i"
-        ><i class="fa-solid fa-envelope"></i
-      ></a>
+          href="https://web.facebook.com/profile.php?id=61560032261539"
+          target="_blank"
+          ><i class="fab fa-facebook"></i
+        ></a>
+        <a
+          href="https://x.com/astidrak?t=nvTdL3QPMBCWtkostB7AkQ"
+          target="_blank"
+          ><i class="fab fa-x-twitter"></i
+        ></a>
+        <a
+          href="https://www.instagram.com/astid_rak1?igsh=Y2F5NHlxbmwzN21i"
+          target="_blank"
+          ><i class="fa-brands fa-instagram"></i
+        ></a>
       </div>
     </section>
+
     <!-- Footer -->
     <footer>
       <div class="container">
         <div class="navigation">
           <ul>
-            <li><a href="#">Home</a></li>
-            <li class="nav-item"><a href="{% url 'core:about' %}">About</a></li>
-            <li><a href="{% url 'core:contact' %}">Contact</a></li>
-            <a href="{% url 'core:login' %}">تسجيل الدخول</a>
+            <li><a href="{% url 'core:index' %}">الرئيسية</a></li>
+            <li><a href="{% url 'core:about' %}">عن الموقع</a></li>
+            <li><a href="{% url 'core:contact' %}">تواصل معنا</a></li>
           </ul>
         </div>
         <div class="social-media">
-
+          <a
+            href="https://web.facebook.com/profile.php?id=61560032261539"
+            target="_blank"
+            ><i class="fab fa-facebook"></i
+          ></a>
+          <a
+            href="https://x.com/astidrak?t=nvTdL3QPMBCWtkostB7AkQ"
+            target="_blank"
+            ><i class="fab fa-x-twitter"></i
+          ></a>
+          <a
+            href="https://www.instagram.com/astid_rak1?igsh=Y2F5NHlxbmwzN21i"
+            target="_blank"
+            ><i class="fa-brands fa-instagram"></i
+          ></a>
         </div>
       </div>
       <p>© 2025 Estedrak. All rights reserved.</p>
     </footer>
 
-    <script src="../../JS/main.js"></script>
+    <script src="{% static 'core/JS/main.js' %}"></script>
   </body>
 </html>

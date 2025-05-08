@@ -248,9 +248,13 @@ class DashboardProgramDelete(LoginRequiredMixin, SuperuserRequiredMixin, DeleteV
 # about page
 
 def about_page(request):
-
-    return render(request, 'core/about.html')
+    unis = University.objects.all()
+    return render(request, 'core/about.html', {
+        'unis': unis,
+    })
 
 def contact_page(request):
-    
-    return render(request, 'core/contact.html')    
+    unis = University.objects.all()
+    return render(request, 'core/contact.html', {
+        'unis': unis,
+    })

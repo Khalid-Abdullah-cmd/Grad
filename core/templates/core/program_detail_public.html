@@ -26,15 +26,23 @@
     </style>
   </head>
   <body>
-    <nav class="navbar">
+    <nav class="navbar" dir="ltr">
       <div class="nav-icon">
         <h1><a href="/">إستدراك</a></h1>
       </div>
-        <li class="nav-item"><a href="{% url 'core:about' %}">عن الموقع</a></li>
-        <li class="nav-item"><a href="{%url 'core:contact' %}">اتصل بنا</a></li>
+      <i class="fa-solid fa-bars menu-toggle" aria-label="فتح القائمة"></i>
+      <ul class="nav-container menu-animated">
+        {% for university in unis %}
         <li class="nav-item">
-          <a href="{% url 'core:login' %}">تسجيل الدخول</a>
+          <a href="{% url 'core:faculty_list_public' university.id %}"
+            >{{ university.name }}</a
+          >
         </li>
+        {% empty %}
+        <li class="nav-item"><a href="#">لا توجد جامعات متاحة حاليًا</a></li>
+        {% endfor %}
+        <li class="nav-item"><a href="{% url 'core:about' %}">عن الموقع</a></li>
+        <li class="nav-item"><a href="{% url 'core:contact'%}">اتصل بنا</a></li>
       </ul>
     </nav>
 
@@ -81,22 +89,21 @@
       <div class="container">
         <div class="navigation">
           <ul>
-            <li><a href="{% url 'core:index' %}">Home</a></li>
-            <li><a href="{%url 'core:about' %}">About</a></li>
-            <li><a href="{%url 'core:contact' %}">Contact</a></li>
+            <li><a href="{% url 'core:index' %}">الرئيسية</a></li>
+            <li><a href="{%url 'core:about' %}">عن الموقع</a></li>
+            <li><a href="{%url 'core:contact' %}">تواصل معنا</a></li>
           </ul>
         </div>
         <div class="social-media">
           <a
             href="https://web.facebook.com/profile.php?id=61560032261539&rdid=QjZKeZcQ2A6lGvB7&share_url=https%3A%2F%2Fweb.facebook.com%2Fshare%2F1Fr4PVYz5B%2F%3F_rdc%3D1%26_rdr#"
-            ><i class="fab fa-facebook"></i
+             target="_blank"><i class="fab fa-facebook"></i
           ></a>
           <a href="https://x.com/astidrak?t=nvTdL3QPMBCWtkostB7AkQ&s=08"
-            ><i class="fab fa-x-twitter"></i
+          target="_blank"><i class="fab fa-x-twitter"></i
           ></a>
           <a href="https://www.instagram.com/astid_rak1?igsh=Y2F5NHlxbmwzN21i"
-            ><i class="fa-solid fa-envelope"></i
-          ></a></div>
+          target="_blank"><i class="fa-brands fa-instagram"></i></a></div>
       </div>
       <p>© 2025 Estedrak. All rights reserved.</p>
     </footer>
