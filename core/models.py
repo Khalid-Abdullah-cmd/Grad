@@ -15,7 +15,7 @@ class University(models.Model):
     
     
 class Faculty(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255, unique=False)
     university = models.ForeignKey(University, on_delete=models.CASCADE, related_name='faculties')
     
     
