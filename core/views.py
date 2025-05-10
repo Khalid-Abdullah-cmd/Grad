@@ -27,14 +27,22 @@ class FacultyListView(TemplateView):
     template_name = 'core/faculty_list_public.html'
 
     def get_context_data(self, **kwargs):
+        # start with the base context
         ctx = super().get_context_data(**kwargs)
+
+        # fetch the current university and its faculties
         uni = get_object_or_404(University, pk=kwargs['uni_id'])
         ctx.update({
             'university': uni,
             'facs': uni.faculties.all(),
         })
+
+        # add the full list of universities for the navbar
+        ctx['unis'] = University.objects.all()
+
         return ctx
     
+
     
 
 # -- login --
@@ -60,12 +68,20 @@ class ProgramDetailView(TemplateView):
         uni = get_object_or_404(University, pk=kwargs['uni_id'])
         fac = get_object_or_404(Faculty, pk=kwargs['fac_id'], university=uni)
         prog = get_object_or_404(Program, pk=kwargs['prog_id'], faculty=fac)
-        return {
+        
+        
+        
+        context = {
             'university': uni,
             'faculty': fac,
             'program': prog,
             'jobs': prog.jobs.all(),
         }
+        
+        
+        context['unis'] = University.objects.all()
+        return context
+
 
 def logout_view(request):
     logout(request)
